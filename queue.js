@@ -8,7 +8,7 @@
  */
 
 const links = [];
-var Exported = {
+let Exported = {
 
     add: function (link) {
         links.push(link);

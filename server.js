@@ -25,8 +25,8 @@ server.get('/urlConverter', (request,response)=>{
 });
 
 server.post('/urlConverter', async (request, response) => {
-    var link = request.body.link;
-    var toReturn = await urlConverter.scanWebsiteForLinksFixedSize(link, 2);
+    let link = request.body.link;
+    let toReturn = await urlConverter.scanWebsiteForLinksFixedSize(link, 2);
     response.send(toReturn.toString());
 });
 
