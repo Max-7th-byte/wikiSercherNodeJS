@@ -9,19 +9,19 @@ async function scanWebsiteForLinksFixedSize(path, maximumQuantity) {
 
     while (!queue.isEmpty()) {
 
-            var sites = []; 
-            var element = 0; 
+            let sites = []; 
+            let element = 0; 
         
         if (maximumQuantity <= 0) {
 
-            const myJson = {};
-            myJson.myMap = mapToObject(data);
-            const json = JSON.stringify(myJson);
-
+            const jsonObj = {};
+            jsonObj.mapData = mapToObject(data);
+            const json = JSON.stringify(jsonObj).substr(12,);
+            
             return json;
         }
 
-        var notInMap = true;
+        let notInMap = true;
         if (data.has(queue.element())) {
             queue.extract();
             notInMap = false;
@@ -30,10 +30,10 @@ async function scanWebsiteForLinksFixedSize(path, maximumQuantity) {
 
             const sourceCode = await getSourceCode(queue.element());
             
-            var linksSourceCode = [];
+            let linksSourceCode = [];
             linksSourceCode = getWikiLinks(sourceCode);
 
-            var notInTheList = true;
+            let notInTheList = true;
 
             for (let i = 0; i < linksSourceCode.length; i++) {
                 for (let j = 0; j < data.size; j++) {
@@ -65,10 +65,10 @@ async function getSourceCode(pathName) {
 }
 
 function getWikiLinks(sourceCode) {
-    var links = [];
-    var count = 0;
+    let links = [];
+    let count = 0;
     const reg = new RegExp('<a href=\\"(/wiki/[a-zA-Z0-9-_:.#()]+)\\"(\\s+\\w+=\\"[a-zA-Z0-9 ]+\\")*>([a-zA-Z0-9-_]+</a>)', 'g');
-    var matched;
+    let matched;
     while ((matched = reg.exec(sourceCode)) != null) {
         links[count++] = matched[1];
     }
@@ -82,6 +82,12 @@ function mapToObject(data) {
   for (let [k,v] of data)
     obj[k] = v
   return obj
+}
+
+function ToString(strMap) {
+
+    let node = '';
+    const reg = new RegExp('\\"/wiki/[a-zA-Z0-9-_:.#()]+\\":', 'g');
 }
 
 module.exports.scanWebsiteForLinksFixedSize = scanWebsiteForLinksFixedSize;

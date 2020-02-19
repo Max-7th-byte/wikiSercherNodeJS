@@ -1,4 +1,12 @@
 
+/**
+ * 
+ * This is a separate data structure -- queue.
+ * FIFO type
+ * methods: add, extract, print, element
+ * 
+ */
+
 const links = [];
 var Exported = {
 
